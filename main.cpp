@@ -1,23 +1,14 @@
-//#include "baza.hpp"
 #include <iostream>
 #include <fstream>
-#include <cstdlib>
-#include <algorithm>
 #include <string>
-#include <cstdio>
-#include <cstring>
 #include <windows.h>
  
 using namespace std;
  
-string opis;
+string opis, odpowiedz;
 string tresc[4];
 string odpA[4], odpB[4], odpC[4], odpD[4];
-string odpowiedz;
 int i=0;
- 
- 
- 
  
 int logika()
 {
