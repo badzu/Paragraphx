@@ -5,12 +5,23 @@
  
 using namespace std;
  
+/*Class Event
+{
+	string opis;
+	string id;
+	string tresc[4];
+	string odp[4];
+}*/
+Event[100] events;
+string id;
 string opis, odpowiedz;
 string tresc[4];
-string odpA[4], odpB[4], odpC[4], odpD[4];
+string odpA[4];//, odpB[4], odpC[4], odpD[4]; // klasa tu wczytaj odpowiedz
+string idA[4];
 int i=0;
  
-int logika()
+
+/*int logika()
 {
 	switch(i)
 	{
@@ -56,7 +67,7 @@ int logika()
 	}
 }
 
-
+*/
 
  
 int main()
@@ -75,11 +86,41 @@ int main()
         exit(0);
     }
  
+ 	int i = 1;
     while(getline(plik,linia))
     {
-        switch(nr_linii)
+    	
+    	if(i <=6)
+    	{
+    		
+    		switch(i)
+        	{
+        		
+        		case 1: id = linia;  cout << id<<endl; break;
+        		case 2: opis = linia;  cout << opis<<endl;       break;
+            	case 3: idA[0] = linia;        break;
+            	case 4: odpA[0] = linia;        break;
+            	case 5: idA[1] = linia;        break;
+            	case 6: odpA[1] = linia;        break;
+            	case 7: idA[2] = linia;        break;
+            	case 8: odpA[2] = linia;        break;
+            	case 9: idA[3] = linia;        break;
+            	case 10: odpA[3] = linia;        break;
+        	}
+    		i++;
+		}
+		else
+    		i = 1;
+    		
+    	
+    	//cout << opis<<endl;
+    	//cout << idA[0]<<endl;
+    	//cout << odpA[0]<<endl;
+    	//system("pause");
+        /*switch(nr_linii)
         {
-        	case 1: opis;  							 break;
+        	
+        	case 1: opis; 						 break;
             case 2: tresc[nr_pytania] = linia;       break;
             case 3: odpA[nr_pytania] = linia;        break;
             case 4: odpB[nr_pytania] = linia;        break;
@@ -88,12 +129,12 @@ int main()
         }
  
         if (nr_linii==6) {nr_linii=0; nr_pytania++;}
-        nr_linii++;
+        nr_linii++;*/
     }
  
     plik.close();
  
-    while(true)
+    /*while(true)
     {
     	int x=0;
     	while(1)
@@ -107,14 +148,14 @@ int main()
         cout<<"* "<<odpB[i]<<endl;
         cout<<"* "<<odpC[i]<<endl;
         cout<<"* "<<odpD[i]<<endl;
-        cout<<"Twoja odpowiedz: ";			
+        cout<<"Twoj wybor : ";			
         cin>>odpowiedz;
  
  		logika();
  		system("cls");
  		odpowiedz.clear();
  
-	}
+	}*/
 }
 
 
