@@ -1,161 +1,103 @@
 #include <iostream>
+#include <conio.h>
 #include <fstream>
 #include <string>
 #include <windows.h>
- 
+#include <cstdlib>
+#include<sstream>
 using namespace std;
- 
-/*Class Event
+
+class ParaX
 {
-	string opis;
-	string id;
-	string tresc[4];
-	string odp[4];
-}*/
-Event[100] events;
-string id;
-string opis, odpowiedz;
-string tresc[4];
-string odpA[4];//, odpB[4], odpC[4], odpD[4]; // klasa tu wczytaj odpowiedz
-string idA[4];
-int i=0;
- 
+    public:
+    string sytuacja[5];
+    string tresc[5];
+    string odpA[5];
+    string odpB[5];
+    string odpC[5];
+    string odpD[5];
+	string idA[5]; int idxA[5];
+	string idB[5]; int idxB[5];
+	string idC[5]; int idxC[5];
+	string idD[5]; int idxD[5];
 
-/*int logika()
-{
-	switch(i)
-	{
-		case 0 :
-			
-		{
-			if(odpowiedz==odpA[i]) i=0;
-			if(odpowiedz==odpB[i]) i=2;
-			if(odpowiedz==odpC[i]) i=999;
-			if(odpowiedz==odpD[i]) i=1;
-			break;
-		}
-		
-		case 1 :
-			
-		{
-			if(odpowiedz==odpA[i]) i=0;
-			if(odpowiedz==odpB[i]) i=2;
-			if(odpowiedz==odpC[i]) i=999;
-			if(odpowiedz==odpD[i]) i=1;
-			break;
-		}
-		
-		case 2 :
-			
-		{
-			if(odpowiedz==odpA[i]) i=1;
-			if(odpowiedz==odpB[i]) i=3;
-			if(odpowiedz==odpC[i]) i=3;
-			if(odpowiedz==odpD[i]) i=3;
-			break;
-		}
-		
-		case 3 :
-			
-		{
-			if(odpowiedz==odpA[i]) i=999;
-			if(odpowiedz==odpB[i]) i=999;
-			if(odpowiedz==odpC[i]) i=999;
-			if(odpowiedz==odpD[i]) i=0;
-			break;
-		}	
-	}
-}
+	string wybor="0";
 
-*/
-
- 
-int main()
+    int wczytywanie()
 {
     int nr_linii=1;
+    int pytanie=0;
     string linia;
-    int nr_pytania=0;
+    int wartosc;
 
- 	
     fstream plik;
     plik.open("data.txt",ios::in);
- 
+
     if (plik.good()==false)
     {
         cout<<"Nie udalo sie otworzyc pliku!";
         exit(0);
     }
- 
- 	int i = 1;
+
     while(getline(plik,linia))
     {
-    	
-    	if(i <=6)
-    	{
-    		
-    		switch(i)
-        	{
-        		
-        		case 1: id = linia;  cout << id<<endl; break;
-        		case 2: opis = linia;  cout << opis<<endl;       break;
-            	case 3: idA[0] = linia;        break;
-            	case 4: odpA[0] = linia;        break;
-            	case 5: idA[1] = linia;        break;
-            	case 6: odpA[1] = linia;        break;
-            	case 7: idA[2] = linia;        break;
-            	case 8: odpA[2] = linia;        break;
-            	case 9: idA[3] = linia;        break;
-            	case 10: odpA[3] = linia;        break;
-        	}
-    		i++;
-		}
-		else
-    		i = 1;
-    		
-    	
-    	//cout << opis<<endl;
-    	//cout << idA[0]<<endl;
-    	//cout << odpA[0]<<endl;
-    	//system("pause");
-        /*switch(nr_linii)
+        switch(nr_linii)
         {
-        	
-        	case 1: opis; 						 break;
-            case 2: tresc[nr_pytania] = linia;       break;
-            case 3: odpA[nr_pytania] = linia;        break;
-            case 4: odpB[nr_pytania] = linia;        break;
-            case 5: odpC[nr_pytania] = linia;        break;
-            case 6: odpD[nr_pytania] = linia;        break;
+        	case 1: sytuacja[pytanie]=linia; 			   break;
+            case 2: tresc[pytanie] = linia;         break;
+            case 3: idA[pytanie] = linia;        break;
+            case 4: odpA[pytanie] = linia;        break;
+            case 5: idB[pytanie] = linia;        break;
+            case 6: odpB[pytanie] = linia;        break;
+            case 7: idC[pytanie] = linia;        break;
+            case 8: odpC[pytanie] = linia;        break;
+            case 9: idD[pytanie] = linia;        break;
+            case 10: odpD[pytanie] = linia;        break;
+            case 11: break;
         }
- 
-        if (nr_linii==6) {nr_linii=0; nr_pytania++;}
-        nr_linii++;*/
-    }
- 
-    plik.close();
- 
-    /*while(true)
-    {
-    	int x=0;
-    	while(1)
-    	{
-    	Sleep(15);
-    	cout<<tresc[i].at(x);
-    	x++;
-    	if(tresc[i].at(x)=='$') { Sleep(200); cout<<endl; break; }
-		}
-        cout<<"* "<<odpA[i]<<endl;
-        cout<<"* "<<odpB[i]<<endl;
-        cout<<"* "<<odpC[i]<<endl;
-        cout<<"* "<<odpD[i]<<endl;
-        cout<<"Twoj wybor : ";			
-        cin>>odpowiedz;
- 
- 		logika();
- 		system("cls");
- 		odpowiedz.clear();
- 
-	}*/
-}
 
+        if (nr_linii==11) {nr_linii=0;pytanie++;}
+        nr_linii++;
+    }
+
+    plik.close();
+
+	}
+
+	int control()
+	{
+
+	int i, X=0;
+    while(true)
+    {
+            if(wybor==odpA[X]){wybor=idA[X];}
+            if(wybor==odpB[X]){wybor=idB[X];}
+            if(wybor==odpC[X]){wybor=idC[X];}
+            if(wybor==odpD[X]){wybor=idD[X];}
+            istringstream iss(wybor);
+            iss>> X;
+            if(wybor==sytuacja[X])
+                {
+
+                    cout<<tresc[X]<<endl;
+                    cout<<odpA[X]<<endl;
+                    cout<<odpB[X]<<endl;
+                    cout<<odpC[X]<<endl;
+                    cout<<odpD[X]<<endl<<endl;
+                    cin>>wybor;
+
+                }
+    }
+
+}
+};
+
+
+int main()
+{
+  ParaX Tekst;
+  Tekst.wczytywanie();
+  Tekst.control();
+
+}
 
