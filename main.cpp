@@ -8,17 +8,18 @@ using namespace std;
 class Paragraphx
 {
     public:
-    string sytuacja[100];
-    string tresc[100];
-    string odpA[100];
-    string odpB[100];
-    string odpC[100];
-    string odpD[100];
-	string idA[100];
-	string idB[100];
-	string idC[100];
-	string idD[100];
-	string wybor="0";
+    int dlugosc = 8;
+    string * sytuacja = new string[dlugosc];
+    string * tresc = new string[dlugosc];
+    string * odpA = new string[dlugosc];
+    string * odpB = new string[dlugosc];
+    string * odpC = new string[dlugosc];
+    string * odpD = new string[dlugosc];
+	string * idA = new string[dlugosc];
+	string * idB = new string[dlugosc];
+	string * idC = new string[dlugosc];
+	string * idD = new string[dlugosc];
+	string wybor="1";
 
 void wczytywanie()
 {
@@ -35,7 +36,7 @@ void wczytywanie()
         exit(0);
     }
 
-    while(getline(plik,linia))
+    while(getline(plik,linia)) // WCZYTUJEMY Z PLIKU TEKSTOWEGO TEKST DO TABLIC JEDNOWYMIAROWYCH
     {
         switch(nr_linii)
         {
@@ -60,27 +61,38 @@ void wczytywanie()
 
 void logika()
 {
-	int X=0;
+	int X=1;
+	string zle;
 
     while(true)
     {
             system("CLS");
-            if(wybor==odpA[X]){wybor=idA[X];}
-            if(wybor==odpB[X]){wybor=idB[X];}
-            if(wybor==odpC[X]){wybor=idC[X];}
-            if(wybor==odpD[X]){wybor=idD[X];}
-            istringstream iss(wybor);
+            if(wybor==odpA[X]){wybor=idA[X];} // SPRAWDZAMY CZY KOMENDA ZOSTA£A WPISANA POPRAWNIE
+            else if(wybor==odpB[X]){wybor=idB[X];} // JESLI TAK TO PRZYPISUJEMY JEJ WARTOS INDEKU ODPOWIEDZI
+            else if(wybor==odpC[X]){wybor=idC[X];}
+            else if(wybor==odpD[X]){wybor=idD[X];}
+            else
+            {
+                ostringstream ss;   // ZAMIENIAMY TUTAJ INTA NA STRINGA, JESLI ZAMIENIMY NASZA WARTOSC X NA STRINGA I PRZYPISZEMY GO WYBOROWI
+                ss << X;            // DZIEKI TEMU NACISNIECIE ZLYCH KOMEND SPOWODUJE POZOSTANIE W BIEZACYM POKOJU (SYTUACJI)
+                zle = ss.str();
+                wybor = zle;
+            }
+            istringstream iss(wybor); // KONWERSJA NASZEGO ID ZE STRING DO INT
             iss>> X;
-            if(wybor==sytuacja[X])
+            if(wybor==sytuacja[X]) // SPRAWDZAMY CZY NASZE ID ODPOWIEDZI JEST ZGODNE Z ID TRESCI FABULY
             {
                 int k=0;
-                while(true)
+                while(true) // EFEKT WYPISYWANIA TRESCI NA EKRANIE
                 {
                     Sleep(20);
                 cout<<tresc[X].at(k);
                     k++;
                     if(tresc[X].at(k)=='$') { Sleep(200); cout<<endl<<endl; break; }
                 }
+
+            }
+                if(X==0){Sleep(600); exit(0);} // SPRWDZAMY CZY ZGINELISMY
                 cout<<odpA[X]<<endl;
                 cout<<odpB[X]<<endl;
                 cout<<odpC[X]<<endl;
@@ -89,20 +101,15 @@ void logika()
                 cin>>wybor;
 
             }
-            else
-            {
-                cout<<"GAME OVER";
-                break;
-            }
+
     }
-}
 
 };
 
 int main()
 {
-  Paragraphx Gra;
-  Gra.wczytywanie();
+  Paragraphx Gra; // TWORZENIE OBJEKTU GRA
+  Gra.wczytywanie(); // WYWO£YWANIE FUNKCJI Z KLASY Paragraphx
   Gra.logika();
 }
 
