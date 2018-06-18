@@ -3,12 +3,13 @@
 #include <string>
 #include <windows.h>
 #include <sstream>
+#include <conio.h>
 using namespace std;
 
 class Paragraphx
 {
     public:
-    int dlugosc = 8;
+    int dlugosc = 8; // DEFINIUJEMY ILE ID MA MIEC NASZA HISTORIA
     string * sytuacja = new string[dlugosc];
     string * tresc = new string[dlugosc];
     string * odpA = new string[dlugosc];
@@ -20,6 +21,45 @@ class Paragraphx
 	string * idC = new string[dlugosc];
 	string * idD = new string[dlugosc];
 	string wybor="1";
+
+void Menu()
+{
+    int o, p;
+    char wybor;
+	for (o=1,p=0 ; p>=0 && o>0;) // petla ktora wykonuje sie ca³y czas dopoki nie zatwierdzimy opcji
+	{
+		system("cls");
+		cout << "                ___                                      _          "<<endl;
+		cout << "               / _ \\__ _ _ __ __ _  __ _ _ __ __ _ _ __ | |__ __  __"<<endl;
+		cout << "              / /_)/ _` | '__/ _` |/ _` | '__/ _` | '_ \\| '_ \\\\ \\/ /"<<endl;
+		cout << "             / ___/ (_| | | | (_| | (_| | | | (_| | |_) | | | |>  < "<<endl;
+		cout << "             \\/    \\__,_|_|  \\__,_|\\__, |_|  \\__,_| .__/|_| |_/_/\\_\\"<<endl;
+		cout << "                                   |___/          |_|               " <<endl;
+		cout << "   ___________________________________________________________________________"<<endl;
+		cout << "   \\                                                                         /"<<endl;
+		cout << "    \\             Bartlomiej Ciolkosz All Rights Reserverd 2018.            /"<<endl;
+		cout << "     \\_____________________________________________________________________/"<<endl<<endl<<endl;
+		cout << "                           ----------------------------"<<endl;
+		if (p==0) cout<<"                           |         > START <        |\n"; else cout<<"                           |           START          |\n";
+		if (p==1) cout<<"                           |      > WYJDZ Z GRY <     |\n"; else cout<<"                           |        WYJDZ Z GRY       |\n";
+		cout << "                           ----------------------------"<<endl;
+		wybor=getch();
+		switch(wybor) // poruszanie sie po menu w góre, w do³ oraz zatwierdzanie
+		{
+			case 72:
+				if (p==1){p--; break;}
+                else break;
+			case 80:
+				if (p==0){p++; break;}
+                else break;
+			case 13:
+				o=0;
+				break;
+		}
+	}
+	if(p==0) {system("cls");} // dla p=0 funkcja koñczy sie przenosz¹c nas tym samym do pocz¹tku kodu w main.cpp
+	if(p==1) exit(0); // dla p=4 funkcja konczy dzia³anie programu
+	}
 
 void wczytywanie()
 {
@@ -109,6 +149,8 @@ void logika()
 int main()
 {
   Paragraphx Gra; // TWORZENIE OBJEKTU GRA
+
+  Gra.Menu();
   Gra.wczytywanie(); // WYWO£YWANIE FUNKCJI Z KLASY Paragraphx
   Gra.logika();
 }
